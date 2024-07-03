@@ -4,10 +4,16 @@ import { UsersModule } from "./modules/users/users.module";
 import { AuthModule } from "./modules/auth/auth.module";
 import { APP_GUARD } from "@nestjs/core";
 import { JwtAuthGuard } from "./modules/auth/guards/jtw-auth.guard";
-import { UploadModule } from './modules/upload/upload.module';
+import { UploadFileModule } from "./modules/uploadFile/uploadFile.module";
 
 @Module({
-  imports: [PrismaModule, UsersModule, AuthModule, AuthModule, UploadModule],
+  imports: [
+    PrismaModule,
+    UsersModule,
+    AuthModule,
+    AuthModule,
+    UploadFileModule,
+  ],
   controllers: [],
   providers: [
     {

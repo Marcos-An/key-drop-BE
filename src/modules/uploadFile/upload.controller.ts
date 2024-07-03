@@ -4,17 +4,15 @@ import {
   UploadedFile,
   UseInterceptors,
 } from "@nestjs/common";
-import { UploadService } from "./upload.service";
 import { FileInterceptor } from "@nestjs/platform-express";
-import { IsPublic } from "src/common/decorators/is-public.decorator";
 import { FileDto } from "./dto/upload-file.dto";
 import { UploadedFileEntity } from "./entities/supabase-file.entity";
+import { UploadFileService } from "./uploadFile.service";
 
 @Controller("upload")
-export class UploadController {
-  constructor(private readonly uploadService: UploadService) {}
+export class UploadFileController {
+  constructor(private readonly uploadService: UploadFileService) {}
 
-  @IsPublic()
   @Post("/")
   @UseInterceptors(FileInterceptor("file"))
   async uploadFile(@UploadedFile() file: FileDto): Promise<UploadedFileEntity> {

@@ -4,7 +4,7 @@ import { createClient } from "@supabase/supabase-js";
 import { UploadedFileEntity } from "./entities/supabase-file.entity";
 
 @Injectable()
-export class UploadService {
+export class UploadFileService {
   async upload(file: FileDto): Promise<UploadedFileEntity> {
     const SUPABESE = createClient(
       process.env.SUPABESE_URL,
