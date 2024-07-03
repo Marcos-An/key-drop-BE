@@ -8,7 +8,9 @@ import { FileInterceptor } from "@nestjs/platform-express";
 import { FileDto } from "./dto/upload-file.dto";
 import { UploadedFileEntity } from "./entities/supabase-file.entity";
 import { UploadFileService } from "./uploadFile.service";
+import { ApiTags } from "@nestjs/swagger";
 
+@ApiTags("Upload Files")
 @Controller("upload")
 export class UploadFileController {
   constructor(private readonly uploadService: UploadFileService) {}

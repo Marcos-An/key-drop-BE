@@ -3,7 +3,9 @@ import { UsersService } from "./users.service";
 import { CreateUserDto } from "./dto/create-user.dto";
 import { User } from "@prisma/client";
 import { IsPublic } from "src/common/decorators/is-public.decorator";
+import { ApiTags } from "@nestjs/swagger";
 
+@ApiTags("Users")
 @Controller("users")
 export class UserController {
   constructor(private readonly userService: UsersService) {}
