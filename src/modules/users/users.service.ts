@@ -1,9 +1,10 @@
-import { Injectable } from "@nestjs/common";
+import { HttpException, HttpStatus, Injectable } from "@nestjs/common";
 import { PrismaService } from "src/services/prisma/prisma.service";
 import { CreateUserDto } from "./dto/create-user.dto";
 import * as bcrypt from "bcrypt";
 import { UserEntity } from "./entities/user-entity";
 import { User } from "@prisma/client";
+import { ExceptionsHandler } from "@nestjs/core/exceptions/exceptions-handler";
 
 @Injectable()
 export class UsersService {
@@ -14,6 +15,17 @@ export class UsersService {
       ...createUserDto,
       password: await bcrypt.hash(createUserDto.password, 10),
     };
+
+    const existUser = this.prisma.user.findFirst({
+      where: { email: createUserDto.email },
+    });
+
+    if (existUser) {
+      throw new HttpException(
+        "Email is already in use",
+        HttpStatus.BAD_REQUEST,
+      );
+    }
 
     const createdUser = await this.prisma.user.create({ data });
 
