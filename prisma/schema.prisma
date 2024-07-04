@@ -16,4 +16,38 @@ model User {
   name     String?
   document String?
   password String
+
+  @@map("user")
+}
+
+model Skin {
+  uuid         String    @id @default(uuid())
+  full_name    String
+  pattern_name String
+  image        String
+  rarity       String
+  weapon       String
+  Content      Content[]
+
+  @@map("skin")
+}
+
+model Case {
+  uuid    String    @id @default(uuid())
+  title   String
+  image   String
+  content Content[]
+
+  @@map("case")
+}
+
+model Content {
+  uuid       String @id @default(uuid())
+  percentage Float
+  caseUuid   String
+  skinUuid   String
+  case       Case   @relation(fields: [caseUuid], references: [uuid], onDelete: Cascade)
+  skin       Skin   @relation(fields: [skinUuid], references: [uuid])
+
+  @@index([caseUuid])
 }

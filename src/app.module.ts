@@ -5,6 +5,8 @@ import { AuthModule } from "./modules/auth/auth.module";
 import { APP_GUARD } from "@nestjs/core";
 import { JwtAuthGuard } from "./modules/auth/guards/jtw-auth.guard";
 import { UploadFileModule } from "./modules/uploadFile/uploadFile.module";
+import { SkinsModule } from './modules/skins/skins.module';
+import { CasesModule } from './modules/cases/cases.module';
 
 @Module({
   imports: [
@@ -13,6 +15,8 @@ import { UploadFileModule } from "./modules/uploadFile/uploadFile.module";
     AuthModule,
     AuthModule,
     UploadFileModule,
+    SkinsModule,
+    CasesModule,
   ],
   controllers: [],
   providers: [
